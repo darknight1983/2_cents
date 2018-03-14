@@ -1,0 +1,9 @@
+
+.center-content {
+  justify-content: center;
+}
+
+.article {
+  border: 1px solid black;
+  margin-bottom: 10px;
+}

@@ -24,6 +24,9 @@ app.set('PORT', process.env.PORT || 3000);
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+// Use public assets with express static middleware
+app.use(express.static('public'));
+
 // Set up app to use body-parser middleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}));

@@ -15,19 +15,23 @@ router.get("/", (req, res) => {
     // Load body into cheerio
     const $ = cheerio.load(body);
 
-    $('.c-entry-box--compact').each((i, article) => {
+    $('.c-entry-box--compact__body').each((i, article) => {
       // Find a way to traverse to get the information you need to
-      // save in mlab. 
-      let articleTitle = $(article).children('a').text();
-      let articleLink = $(article).children("a").attr("href");
+      // save in mlab.
+      let articleTitle = $(article).children('h2').text();
+      let articleLink = $(article).find("a").attr("href");
 
       stuff.push({
         title: articleTitle,
         link: articleLink
       })
     })
-    res.json(stuff)
+    res.render('home', { articles: stuff });
   })
+});
+
+router.get('/save', (req, res) => {
+  console.log(req.params)
 })
 
 

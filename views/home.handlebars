@@ -1,2 +1,18 @@
 
-<h1 class="hello">Hello</h1>
+
+
+
+<ul class="mdl-list mdl-cell mdl-cell--8-col">
+  {{#each articles}}
+    <li class="mdl-list__item mdl-list__item--three-line article">
+      <span class="mdl-list__item-primary-content">
+        <i class="material-icons">description</i>{{title}}</i>
+        <span class="mdl-list__item-text-body"><a href="{{link}}">Check It Out!</a></span>
+      </span>
+
+      <span class="mdl-list__item-secondary-content">
+        <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">save</i></a>
+      </span>
+    </li>
+  {{/each}}
+</ul>
