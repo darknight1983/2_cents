@@ -3,6 +3,11 @@ const request = require('request');
 const cheerio = require('cheerio');
 const router = express.Router();
 
+// Require the Article model.
+const Article = require('../models/articleModel.js');
+
+
+
 
 router.get("/", (req, res) => {
   const stuff = [];
@@ -30,8 +35,15 @@ router.get("/", (req, res) => {
   })
 });
 
-router.get('/save', (req, res) => {
-  console.log(req.params)
+router.post('/save', (req, res) => {
+  Article.create({
+    headline: req.body.headline,
+    url: req.body.url
+  }).then((article) => {
+    res.json(article)
+  }).catch((err) => {
+    res.json(err)
+  })
 })
 
 
