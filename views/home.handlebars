@@ -2,7 +2,7 @@
 
 
 
-<ul class="mdl-list mdl-cell mdl-cell--8-col">
+<!-- <ul class="mdl-list mdl-cell mdl-cell--8-col">
   {{#each articles}}
     <li class="mdl-list__item mdl-list__item--three-line article">
       <span data-title="{{title}}" class="mdl-list__item-primary-content">
@@ -22,4 +22,26 @@
       </span>
     </li>
   {{/each}}
-</ul>
+</ul> -->
+
+{{#each articles}}
+    <div class="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--4dp">
+      <div class="mdl-card__title">
+        <a href="{{link}}"><i class="material-icons">link</i></a>
+      </div>
+      <div class="mdl-card__media">
+        <img src="http://via.placeholder.com/419x150" alt="article_image">
+      </div>
+      <div class="mdl-card__supporting-text">
+        {{title}}
+      </div>
+      <div class="mdl-card__actions">
+        <form class="articleForm" action="/comment" method="post">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" name="comment" id="comment" required>
+            <label class="mdl-textfield__label" for="comment">Enter Comment</label>
+          </div>
+        </form>
+      </div>
+    </div>
+{{/each}}

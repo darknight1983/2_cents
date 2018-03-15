@@ -25,10 +25,13 @@ router.get("/", (req, res) => {
       // save in mlab.
       let articleTitle = $(article).children('h2').text();
       let articleLink = $(article).find("a").attr("href");
+      let articleImg = $(article).parent().children('a').children('div').children('img').attr('src');
+      console.log(articleImg)
 
       stuff.push({
         title: articleTitle,
-        link: articleLink
+        link: articleLink,
+        img: articleImg
       })
     })
     res.render('home', { articles: stuff });
@@ -44,6 +47,10 @@ router.post('/save', (req, res) => {
   }).catch((err) => {
     res.json(err)
   })
+});
+
+router.post('/comment', (req, res) => {
+  console.log(req.body.comment)
 })
 
 
