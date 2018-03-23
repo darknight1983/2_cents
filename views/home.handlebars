@@ -36,10 +36,14 @@
         {{title}}
       </div>
       <div class="mdl-card__actions">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent"
-                id="save-button">
+        <button class="save-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent"
+                id="demo-show-snackbar" type="button">
           Save Article
         </button>
+        <div id="demo-snackbar-example" class="mdl-js-snackbar mdl-snackbar">
+          <div class="mdl-snackbar__text"></div>
+          <button class="mdl-snackbar__action" type="button"></button>
+        </div>
         <!-- <form class="articleForm" id="formValidate" action="/comment" method="post">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" name="comment" id="comment">

@@ -3,7 +3,7 @@
 
 $(function() {
 
-  $(document).on('click', '#save-button', function(e) {
+  $(document).on('click', '.save-button', function(e) {
     // Extract the id from the component so that you will know where the comment
     // needs to be saved.
     e.preventDefault();
