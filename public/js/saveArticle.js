@@ -3,10 +3,15 @@
 
 $(function() {
 
-  $(document).on('click', '#save', function(e) {
+  $(document).on('click', '#save-button', function(e) {
+    // Extract the id from the component so that you will know where the comment
+    // needs to be saved.
     e.preventDefault();
-    let link = $(this).parents('li').children('span').children('span').children('a').attr('href');
-    let title = $(this).parents('li').children('.mdl-list__item-primary-content').data('title');
+    // Extract the data from the component
+    let link = $(this).parents('.mdl-cell').children('.mdl-card__title')
+                .children('a').attr('href');
+    let title = $(this).parents('.mdl-cell').children('.mdl-card__supporting-text')
+                .text().trim();
 
     let articleInfo = {
       headline: title,

@@ -3,8 +3,9 @@ const request = require('request');
 const cheerio = require('cheerio');
 const router = express.Router();
 
-// Require the Article model.
+// Require the models.
 const Article = require('../models/articleModel.js');
+const Comment = require('../models/commentModel');
 
 
 
@@ -29,8 +30,8 @@ router.get("/", (req, res) => {
 
       // Find a way to traverse to get the information you need to
       // save in mlab.
-      let articleTitle = $(article).children('h2').text();
-      let articleLink = $(article).find("a").attr("href");
+      let articleTitle = $(article).children('h2').text().trim();
+      let articleLink = $(article).find("a").attr("href").trim();
       let articleImg = $(article).parent().children('a').children('div').children('img').attr('src');
       console.log(articleImg)
 
@@ -47,19 +48,27 @@ router.get("/", (req, res) => {
   })
 });
 
-// This route is for saving comments and will have to be refactored to meet the
-// requirements.
+router.get('/savedArticles', (req, res) => {
+  // Query the database and return all the articles that have been saved.
+  Article.find({}).then(docs => {
+    res.render('saved', {articles: docs});
+  })
+})
+
+// This route is 
 router.post('/save', (req, res) => {
   Article.create({
     headline: req.body.headline,
     url: req.body.url
   }).then((article) => {
-    res.json(article)
+    // re-direct the user back to the home page.
+    console.log(article)
   }).catch((err) => {
     res.json(err)
   })
 });
 
+// This route is for saving a comment
 router.post('/comment', (req, res) => {
   console.log(req.body.comment)
 })

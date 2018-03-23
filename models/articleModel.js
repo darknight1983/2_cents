@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Comment = require('./commentModel');
 
 // Reference to the Schema Constructor
 const Schema = mongoose.Schema;
@@ -19,7 +19,13 @@ const ArticleSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: Comment
+    }
+  ]
 });
 
 // Create the model based on the ArticleSchema defined above.
