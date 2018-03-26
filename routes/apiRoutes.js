@@ -50,12 +50,23 @@ router.get("/", (req, res) => {
 
 router.get('/savedArticles', (req, res) => {
   // Query the database and return all the articles that have been saved.
-  Article.find({}).then(docs => {
-    res.render('saved', {articles: docs});
-  })
+  // Article.find({}).then(docs => {
+  //   res.render('saved', {articles: docs});
+  // })
+     Article.find({})
+     // Find any comments that are associated with the retrieved articles
+      .sort({_id: -1})
+      .populate("comments")
+      .exec((err, docs) => {
+        if (err) {
+          console.log(err)
+        } else {
+          res.render('saved', { articles: docs});
+        }
+      })
 })
 
-// This route is 
+// This route is
 router.post('/save', (req, res) => {
   Article.create({
     headline: req.body.headline,
@@ -69,8 +80,16 @@ router.post('/save', (req, res) => {
 });
 
 // This route is for saving a comment
-router.post('/comment', (req, res) => {
-  console.log(req.body.comment)
+router.post('/comment/:id', (req, res) => {
+  Comment.create({
+    post: req.body.comment
+  }).then((dbComment) => {
+    return Article.findOneAndUpdate({_id: req.params.id}, { $push: { comments: dbComment._id}}, {new: true})
+  }).then((article) => {
+    res.redirect('/savedArticles')
+  }).catch((err) => {
+    console.log(err)
+  })
 })
 
 

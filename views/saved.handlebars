@@ -10,7 +10,7 @@
         {{headline}}
       </div>
       <div class="mdl-card__actions">
-        <form class="articleForm" id="formValidate" action="/comment" method="post">
+        <form class="articleForm" id="formValidate" action="/comment/{{id}}" method="post">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" name="comment" id="comment">
             <label class="mdl-textfield__label" for="comment">Enter Comment</label>
@@ -21,13 +21,15 @@
           </button>
         </form>
       </div>
+      <!-- If there are comments for this article, then show them here. -->
+      {{#if comments}}
       <div class="mdl-card__supporting-text">
         <ul class=mdl-list>
-          <li class="mdl-list_item">This is an example comment</li>
-          <li class="mdl-list_item">This is an example comment</li>
-          <li class="mdl-list_item">This is an example comment</li>
-          <li class="mdl-list_item">This is an example comment</li>
+          {{#each comments}}
+            <li class="mdl-list_item">{{post}}</li>
+          {{/each}}
         </ul>
       </div>
+      {{/if}}
     </div>
 {{/each}}
